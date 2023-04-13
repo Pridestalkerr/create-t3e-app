@@ -8,7 +8,7 @@
     "dev": "tsup --watch"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/eslint": "^8.37.0",
     "@types/inquirer": "^9.0.3",
@@ -19,6 +19,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "chalk": "^5.2.0",
     "commander": "^10.0.0",
     "inquirer": "^9.1.5"
   }
