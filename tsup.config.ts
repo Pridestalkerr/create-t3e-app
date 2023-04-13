@@ -1,6 +1,6 @@
 import { defineConfig } from "tsup";
 
-const isDev = true;
+const isDev = process.env.npm_lifecycle_event === "dev";
 
 export default defineConfig({
   clean: true,
@@ -12,4 +12,5 @@ export default defineConfig({
   sourcemap: true,
   target: "esnext",
   outDir: "dist",
+  onSuccess: isDev ? "node dist/index.js" : undefined,
 });
