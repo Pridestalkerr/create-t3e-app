@@ -1,35 +1,27 @@
-import { Command } from "commander";
-import { CLI_NAME } from "./cli/consts";
+import { renderTitle } from "~/utils/renderTitle.js";
+import { logger } from "~/utils/logger.js";
+import { runCli } from "~/cli/index.js";
 
-import inquirer from "inquirer";
+const main = async () => {
+  renderTitle();
+  logger.info("node -v:", process.version);
 
-interface CliOptions {
-  install: boolean;
-
-  express: boolean;
-  tailwind: boolean;
-  trpc: boolean;
-  prisma: boolean;
-
-  // auth stuff
-  expressSession: boolean;
-  nextAuth: boolean;
-}
-
-export const run = async () => {
-  const program = new Command().name(CLI_NAME);
-
-  program.description("Extended T3 stack web app bootstrapper for the CLI");
-
-  await inquirer.prompt({
-    name: "appName",
-    type: "input",
-    message: "What is the name of your app?",
-    default: "my-app",
-    transformer: (input: string) => {
-      return input.trim();
-    },
-  });
+  const {
+    appName,
+    packages,
+    flags: { install, importAlias },
+  } = await runCli();
 };
 
-run();
+main().catch((err) => {
+  logger.error("Aborting installation...");
+  if (err instanceof Error) {
+    logger.error(err);
+  } else {
+    logger.error(
+      "An unknown error has occurred. Please open an issue on github with the below:"
+    );
+    console.log(err);
+  }
+  process.exit(1);
+});
