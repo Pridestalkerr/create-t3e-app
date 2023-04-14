@@ -2,25 +2,28 @@
   "name": "create-t3express-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
+  "exports": "./dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch && node dist/index.js",
+    "build": "tsup"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "@types/eslint": "^8.37.0",
+    "@types/gradient-string": "^1.1.2",
     "@types/inquirer": "^9.0.3",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
+    "@types/node": "^18.15.11",
     "eslint": "^8.38.0",
     "tsup": "^6.7.0",
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "chalk": "^5.2.0",
     "commander": "^10.0.0",
+    "gradient-string": "^2.0.2",
     "inquirer": "^9.1.5"
   }
 }
