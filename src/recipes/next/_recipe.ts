@@ -20,7 +20,7 @@ export const arch = {
 export const steps = [
   {
     id: "create-next-app",
-    label: "Create Next App",
+    label: "Creating Next.js app...",
     description: "Create a Next.js app with the default template",
     run: async ({
       projectDir,
