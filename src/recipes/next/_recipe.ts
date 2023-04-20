@@ -1,39 +1,33 @@
 import { $ } from "execa";
+import { ProjectOptions } from "~/installer.js";
 
-// empty, nextjs sets up the base for us
-export const packageJson = {
-  scripts: {},
-  dependencies: {},
-  devDependencies: {},
-};
+import { type Recipe } from "~/recipes/index.js";
 
-// instructions should be:
-// - scripts to run (such as create next app?)
-// - add files
-// - modify files (with template engine maybe)
-
-export const arch = {
-  ".gitignore": "gitignore",
-  "tsconfig.json": "tsconfig",
-};
-
-export const steps = [
-  {
-    id: "create-next-app",
-    label: "Creating Next.js app...",
-    description: "Create a Next.js app with the default template",
-    run: async ({
-      projectDir,
-      language,
-      packageManager,
-      importAlias,
-    }: {
-      projectDir: string;
-      language: "typescript" | "javascript";
-      packageManager: "yarn" | "npm";
-      importAlias: `${string}/*`;
-    }) => {
-      await $`npx create-next-app@latest ${projectDir} --${language} --no-tailwind --no-eslint --src-dir --no-experimental-app --import-alias ${importAlias}`;
-    },
+const recipe: Recipe = {
+  packageJson: {
+    scripts: {},
+    dependencies: {},
+    devDependencies: {},
   },
-];
+  arch: {
+    ".gitignore": "gitignore",
+    "tsconfig.json": "tsconfig",
+  },
+  steps: [
+    {
+      id: "create-next-app",
+      label: "Creating Next.js app...",
+      description: "Create a Next.js app with the default template",
+      run: async ({
+        projectDir,
+        language,
+        // packageManager,
+        importAlias,
+      }: ProjectOptions) => {
+        await $`npx create-next-app@latest ${projectDir} --${language} --no-tailwind --no-eslint --src-dir --no-experimental-app --import-alias ${importAlias}`;
+      },
+    },
+  ],
+};
+
+export default recipe;

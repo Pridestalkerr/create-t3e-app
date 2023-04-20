@@ -1,24 +1,18 @@
 import { renderTitle } from "~/utils/renderTitle.js";
 import { logger } from "~/utils/logger.js";
 import { runCli } from "~/cli/index.js";
-import { createProject } from "./helpers/createProject.js";
+import { create } from "~/installer.js";
 
 const main = async () => {
   renderTitle();
   logger.info("node -v:", process.version);
 
-  const {
-    appName,
-    packages,
-    flags: { install, importAlias },
-  } = await runCli();
+  const options = await runCli();
 
-  const projectDir = await createProject({
-    projectName: appDir,
-    packages: usePackages,
-    importAlias: importAlias,
-    noInstall,
-  });
+  await create(options);
+
+  logger.success("Installation complete! 🎉");
+  logger.success("Godspeed! 🚀");
 };
 
 main().catch((err) => {
