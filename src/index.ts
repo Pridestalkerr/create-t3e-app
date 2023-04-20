@@ -1,6 +1,7 @@
 import { renderTitle } from "~/utils/renderTitle.js";
 import { logger } from "~/utils/logger.js";
 import { runCli } from "~/cli/index.js";
+import { createProject } from "./helpers/createProject.js";
 
 const main = async () => {
   renderTitle();
@@ -11,6 +12,13 @@ const main = async () => {
     packages,
     flags: { install, importAlias },
   } = await runCli();
+
+  const projectDir = await createProject({
+    projectName: appDir,
+    packages: usePackages,
+    importAlias: importAlias,
+    noInstall,
+  });
 };
 
 main().catch((err) => {

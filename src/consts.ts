@@ -1,3 +1,10 @@
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const distPath = path.dirname(__filename);
+export const PKG_ROOT = path.join(distPath, "../");
+
 export const TITLE_TEXT = `   ___ ___ ___   _ _____ ___   _____ _______     _   ___ ___ 
   / __| _ \\ __| /_\\_   _| __| |_   _|__ / __|   /_\\ | _ \\ _ \\
  | (__|   / _| / _ \\| | | _|    | |  |_ \\ _|   / _ \\|  _/  _/
